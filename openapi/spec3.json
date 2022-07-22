@@ -1,0 +1,819 @@
+{
+  "openapi" : "3.0.3",
+  "info" : {
+    "title" : "Responsibly Marketplace API",
+    "version" : "0.1"
+  },
+  "paths" : {
+    "/suppliers" : {
+      "get" : {
+        "description" : "Lists all the suppliers in your organization",
+        "operationId" : "getSuppliers",
+        "parameters" : [
+          {
+            "name" : "page",
+            "in" : "query",
+            "description" : "Page number to fetch",
+            "required" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int32",
+              "default" : 1
+            }
+          },
+          {
+            "name" : "pageSize",
+            "in" : "query",
+            "description" : "Page size",
+            "required" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int32",
+              "default" : 100
+            }
+          }
+        ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Page_Supplier"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid value for: query parameter page, Invalid value for: query parameter pageSize",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "API key is missing or invalid",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "security" : [
+          {
+            "httpAuth" : [
+            ]
+          }
+        ]
+      }
+    },
+    "/suppliers/{id}" : {
+      "get" : {
+        "description" : "Retrieve a supplier by its unique identifier",
+        "operationId" : "getSuppliersId",
+        "parameters" : [
+          {
+            "name" : "id",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Supplier"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "API key is missing or invalid",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Requested resource could not be found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "security" : [
+          {
+            "httpAuth" : [
+            ]
+          }
+        ]
+      }
+    },
+    "/policy-parameters" : {
+      "get" : {
+        "description" : "Lists all the policy parameters in the Responsibly framework",
+        "operationId" : "getPolicy-parameters",
+        "parameters" : [
+          {
+            "name" : "page",
+            "in" : "query",
+            "description" : "Page number to fetch",
+            "required" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int32",
+              "default" : 1
+            }
+          },
+          {
+            "name" : "pageSize",
+            "in" : "query",
+            "description" : "Page size",
+            "required" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int32",
+              "default" : 100
+            }
+          }
+        ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Page_PolicyParameter"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid value for: query parameter page, Invalid value for: query parameter pageSize",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "API key is missing or invalid",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "security" : [
+          {
+            "httpAuth" : [
+            ]
+          }
+        ]
+      }
+    },
+    "/policy-parameters/{id}" : {
+      "get" : {
+        "description" : "Retrieve a policy parameter by its unique identifier",
+        "operationId" : "getPolicy-parametersId",
+        "parameters" : [
+          {
+            "name" : "id",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PolicyParameter"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "API key is missing or invalid",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Requested resource could not be found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "security" : [
+          {
+            "httpAuth" : [
+            ]
+          }
+        ]
+      }
+    },
+    "/data-sources" : {
+      "get" : {
+        "description" : "Lists all available data sources that have data on at least one of the suppliers in your organization",
+        "operationId" : "getData-sources",
+        "parameters" : [
+          {
+            "name" : "page",
+            "in" : "query",
+            "description" : "Page number to fetch",
+            "required" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int32",
+              "default" : 1
+            }
+          },
+          {
+            "name" : "pageSize",
+            "in" : "query",
+            "description" : "Page size",
+            "required" : false,
+            "schema" : {
+              "type" : "integer",
+              "format" : "int32",
+              "default" : 100
+            }
+          }
+        ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Page_DataSource"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid value for: query parameter page, Invalid value for: query parameter pageSize",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "API key is missing or invalid",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "security" : [
+          {
+            "httpAuth" : [
+            ]
+          }
+        ]
+      }
+    },
+    "/data-sources/{id}" : {
+      "get" : {
+        "description" : "Retrieve a data source by its unique identifier",
+        "operationId" : "getData-sourcesId",
+        "parameters" : [
+          {
+            "name" : "id",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DataSource"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "API key is missing or invalid",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Requested resource could not be found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "security" : [
+          {
+            "httpAuth" : [
+            ]
+          }
+        ]
+      }
+    },
+    "/score-calculation" : {
+      "post" : {
+        "description" : "Given a set of input policy parameters and a set of suppliers, computes a score per supplierper policy parameter from all the available data (public and proprietary to your organization)",
+        "operationId" : "postScore-calculation",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ScoreCalculationInput"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/SupplierScore"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "API key is missing or invalid",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "security" : [
+          {
+            "httpAuth" : [
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "ApiError" : {
+        "required" : [
+          "message"
+        ],
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "description" : "Human readable description of the error"
+          }
+        }
+      },
+      "DataPoint" : {
+        "required" : [
+          "supplierId",
+          "dataSourceId",
+          "isClaim"
+        ],
+        "type" : "object",
+        "properties" : {
+          "supplierId" : {
+            "type" : "string",
+            "description" : "Unique identifier of the supplier this data point applies to"
+          },
+          "dataSourceId" : {
+            "type" : "string",
+            "description" : "Unique identitier of the data source this data point originates from"
+          },
+          "isClaim" : {
+            "type" : "boolean",
+            "description" : "Flag indicating if the data point is a claim or has been verified"
+          }
+        }
+      },
+      "DataSource" : {
+        "required" : [
+          "id",
+          "name",
+          "dataSourceType"
+        ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Unique identifier for the object"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the data source"
+          },
+          "vendorName" : {
+            "type" : "string",
+            "description" : "Name of the vendor of the data source"
+          },
+          "dataSourceType" : {
+            "$ref" : "#/components/schemas/DataSourceType"
+          },
+          "website" : {
+            "type" : "string",
+            "description" : "Website of the data source"
+          },
+          "logoUrl" : {
+            "type" : "string",
+            "description" : "URL to the logo of the data source or the vendor"
+          }
+        }
+      },
+      "DataSourceType" : {
+        "type" : "string",
+        "description" : "Type of the data source",
+        "enum" : [
+          "Certificate",
+          "Questionnaire",
+          "Custom",
+          "Other"
+        ]
+      },
+      "Page_DataSource" : {
+        "required" : [
+          "pageNumber",
+          "pageSize",
+          "pageCount",
+          "totalItemCount"
+        ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DataSource"
+            }
+          },
+          "pageNumber" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "pageCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "totalItemCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "nextPage" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "prevPage" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Page_PolicyParameter" : {
+        "required" : [
+          "pageNumber",
+          "pageSize",
+          "pageCount",
+          "totalItemCount"
+        ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyParameter"
+            }
+          },
+          "pageNumber" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "pageCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "totalItemCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "nextPage" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "prevPage" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Page_Supplier" : {
+        "required" : [
+          "pageNumber",
+          "pageSize",
+          "pageCount",
+          "totalItemCount"
+        ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Supplier"
+            }
+          },
+          "pageNumber" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "pageCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "totalItemCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "nextPage" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "prevPage" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "PolicyParameter" : {
+        "required" : [
+          "id",
+          "name",
+          "policyCategoryName"
+        ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Unique identifier for the object"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the policy parameter"
+          },
+          "policyCategoryName" : {
+            "type" : "string",
+            "description" : "Name of the top-level category the parameter is part of"
+          }
+        }
+      },
+      "PolicyParameterScore" : {
+        "required" : [
+          "policyParameterId",
+          "score"
+        ],
+        "type" : "object",
+        "properties" : {
+          "policyParameterId" : {
+            "type" : "string",
+            "description" : "Unique identifier of the policy parameter this score applies to"
+          },
+          "score" : {
+            "$ref" : "#/components/schemas/Score"
+          },
+          "dataPoints" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DataPoint"
+            },
+            "description" : "List of all the data points that were used in the score calculation"
+          }
+        }
+      },
+      "Score" : {
+        "oneOf" : [
+          {
+            "$ref" : "#/components/schemas/ScoreNotAvailable"
+          },
+          {
+            "$ref" : "#/components/schemas/ScorePoints"
+          }
+        ],
+        "discriminator" : {
+          "propertyName" : "type",
+          "mapping" : {
+            "ScoreNotAvailable" : "#/components/schemas/ScoreNotAvailable",
+            "ScorePoints" : "#/components/schemas/ScorePoints"
+          }
+        }
+      },
+      "ScoreCalculationInput" : {
+        "required" : [
+          "supplierIds",
+          "policyParameterIds"
+        ],
+        "type" : "object",
+        "properties" : {
+          "supplierIds" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            },
+            "minItems" : 1
+          },
+          "policyParameterIds" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            },
+            "minItems" : 1
+          }
+        }
+      },
+      "ScoreNotAvailable" : {
+        "required" : [
+          "type"
+        ],
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ScorePoints" : {
+        "required" : [
+          "value",
+          "type"
+        ],
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "integer",
+            "description" : "Score on the scale of 1 to 5",
+            "format" : "int32"
+          },
+          "type" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Supplier" : {
+        "required" : [
+          "id",
+          "name",
+          "countryIso2Code"
+        ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "Unique identifier for the object"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the supplier"
+          },
+          "countryIso2Code" : {
+            "type" : "string",
+            "description" : "Uppercase ISO3166 Alpha-2 country code"
+          },
+          "categoryNames" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            },
+            "description" : "Names of all the categories the supplier is part of"
+          }
+        }
+      },
+      "SupplierScore" : {
+        "required" : [
+          "supplierId",
+          "score",
+          "coverage"
+        ],
+        "type" : "object",
+        "properties" : {
+          "supplierId" : {
+            "type" : "string",
+            "description" : "Unique identifier of the supplier this score applies to"
+          },
+          "score" : {
+            "$ref" : "#/components/schemas/Score"
+          },
+          "coverage" : {
+            "type" : "number",
+            "description" : "Percentage of the policy parameters that are covered by at least 1 data point"
+          },
+          "dataPoints" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DataPoint"
+            },
+            "description" : "Aggregated list of all the data points that were used in the score calculation, across all policy parameters"
+          },
+          "policyParameterScores" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyParameterScore"
+            },
+            "description" : "List of all the scores, broken down per policy parameter"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "httpAuth" : {
+        "type" : "http",
+        "scheme" : "bearer"
+      }
+    }
+  }
+}
